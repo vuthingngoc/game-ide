@@ -1,0 +1,36 @@
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(225, 6%, 25%);
+  height: 100%;
+  width: 100%;
+}
+
+.editor-title {
+  font-weight: 500;
+  color: hsl(225, 6%, 95%);
+  display: flex;
+  border-radius: 4px 4px 0 0;
+  justify-content: space-between;
+
+  span {
+    background: #282a36;
+    padding: 4px 16px;
+    border-top: 4px solid #44475a;
+  }
+
+  button {
+    background: #282a36;
+    border: none;
+    color: hsl(225, 6%, 95%);
+    padding: 2px;
+  }
+}
+
+.code-mirror-wrapper {
+  height: 100%;
+
+  & > div {
+    height: 100%;
+  }
+}
