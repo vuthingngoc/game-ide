@@ -28,7 +28,7 @@
 }
 
 .code-mirror-wrapper {
-  height: 100%;
+  height: calc(100% - 12px);
 
   & > div {
     height: 100%;
