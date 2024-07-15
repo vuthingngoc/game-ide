@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 export default function useDragBar(divRef: React.RefObject<HTMLDivElement>, direction: 'horizontal' | 'vertical') {
   const [isDragging, setIsDragging] = useState(false)

@@ -1,8 +1,10 @@
-import { CodeEditor } from '@/components'
-import useLocalStorage from '@/hooks/use-local-storage'
 import { useEffect, useRef, useState } from 'react'
-import styles from './styles.module.scss'
+
+import { CodeEditor } from '@/components'
 import useDragBar from '@/hooks/use-drag-bar'
+import useLocalStorage from '@/hooks/use-local-storage'
+
+import styles from './styles.module.scss'
 
 export default function CodePage() {
   const [srcDoc, setSrcDoc] = useState('')
@@ -22,12 +24,12 @@ export default function CodePage() {
   useEffect(() => {
     const iframe = iframeRef.current
     if (!iframe) return
-    if (isDraggingPanel || isDraggingCenter) {
+    if (isDraggingPanel || isDraggingCenter || isDraggingLeft) {
       iframe.style.pointerEvents = 'none'
     } else {
       iframe.style.pointerEvents = 'auto'
     }
-  }, [isDraggingPanel, isDraggingCenter])
+  }, [isDraggingPanel, isDraggingCenter, isDraggingLeft])
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -44,9 +46,9 @@ export default function CodePage() {
 
   return (
     <div className={styles['code-container']}>
-      <div className={styles['top-pane']} ref={panelRef}>
+      <div ref={panelRef} className={styles['top-pane']}>
         <div ref={leftEditorRef} className={styles.editor}>
-          <CodeEditor language='xml' displayName='HTML' value={html} onChange={setHtml} />
+          <CodeEditor displayName='HTML' language='xml' value={html} onChange={setHtml} />
         </div>
 
         <div className={styles['horizontal-resizer']} onMouseDown={onMouseDownLeft} />
@@ -54,9 +56,9 @@ export default function CodePage() {
         <div ref={centerEditorRef} className={styles.editor}>
           <CodeEditor
             className={styles.editor}
-            style={{ width: '300px' }}
-            language='css'
             displayName='CSS'
+            language='css'
+            style={{ width: '300px' }}
             value={css}
             onChange={setCss}
           />
@@ -64,12 +66,12 @@ export default function CodePage() {
         <div className={styles['horizontal-resizer']} onMouseDown={onMouseDownCenter} />
 
         <div className={styles.editor}>
-          <CodeEditor className={styles.editor} language='javascript' displayName='JS' value={js} onChange={setJs} />
+          <CodeEditor className={styles.editor} displayName='JS' language='javascript' value={js} onChange={setJs} />
         </div>
       </div>
       <div className={styles['vertical-resizer']} onMouseDown={onMouseDownPanel} />
       <div className={styles['bottom-pane']}>
-        <iframe ref={iframeRef} srcDoc={srcDoc} title='output' sandbox='allow-scripts' width='100%' height='100%' />
+        <iframe ref={iframeRef} height='100%' sandbox='allow-scripts' srcDoc={srcDoc} title='output' width='100%' />
       </div>
     </div>
   )

@@ -4,6 +4,6 @@ export const PATH = {
   REGISTER: '/register',
   RESET_PASSWORD: '/reset-password',
   CODE: '/code',
-  PROFILE: '/profile',
+  PROFILE: '/profile'
 }
 export const API_URL = import.meta.env.VITE_API_URL

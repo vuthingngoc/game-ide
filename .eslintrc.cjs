@@ -2,33 +2,33 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:import/recommended',
-    'eslint:recommended',
-    'plugin:react/recommended'
+    'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', './src/assets/*'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'react', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react-refresh', 'react', 'simple-import-sort', 'import', 'prettier', 'react-hooks'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
-    'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
-    'import/extensions': ['error', 'ignorePackages', { ts: 'never', tsx: 'never' }],
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    'max-len': ['warn', { code: 200, ignoreComments: true, ignoreUrls: true }],
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'import/prefer-default-export': 'off',
-    'react/prop-types': 'off',
-    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    // sort-imports
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'error',
-    'react/jsx-uses-vars': 'error'
-  }
-}
+    'react/jsx-sort-props': [
+      'error',
+      {
+        callbacksLast: true,
+        shorthandFirst: true,
+        shorthandLast: false,
+        ignoreCase: false,
+        noSortAlphabetically: false,
+        reservedFirst: true,
+      },
+    ],
+  },
+};
